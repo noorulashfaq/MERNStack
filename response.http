@@ -1,0 +1,16 @@
+GET http://localhost:1234/myData
+
+GET http://localhost:1234/conversion/5/5
+
+GET http://localhost:1234/fetch
+
+POST http://localhost:1234/insert
+Content-Type: application/json
+
+{
+    "Rollno":176,
+    "Name":"Vijayamohanraj",
+    "FG_id":0,
+    "Gender_id":0,
+    "Dept_id":0
+}
