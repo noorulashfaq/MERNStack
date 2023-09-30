@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 
 const app = refExp()
+const port = 1234
 const db=refMysql.createConnection({
     "host":"localhost",
     "user":"root",
@@ -23,7 +24,7 @@ db.connect((err) => {
 app.use(bodyParser.json());
 
 
-app.listen(1234,()=>{
+app.listen(port,()=>{
     console.log("My app is running!!")
 })
 
@@ -43,13 +44,34 @@ app.get('/fetch',async(req,res)=>{
 })
 
 app.post('/insert',async(req,res)=>{
+    const {Rollno,Name,FG_id,Gender_id,Dept_id} = req.body
     const sql="insert into student_details values (?,?,?,?,?)"
-    db.query(sql,["Rollno","Name","FG_id","Gender_id","Dept_id"],(err,result)=>{
+    db.query(sql,[Rollno,Name,FG_id,Gender_id,Dept_id],(err,result)=>{
         if (err) {
             res.status(500).json({ "error": err.message })
         }
         else{
             res.status(200).json({ "message": result.affectedRows });
         }
+    })
+})
+
+// app.get('/update',async(req,res)=>{
+//     res.send("HI")
+// })
+
+app.put('/update',async(req,res)=>{
+    const {Rollno,Name,FG_id,Gender_id,Dept_id} = req.body
+    const sql="update student_details set Name=?, FG_id=?, Gender_id=?, Dept_id=? where Rollno=?"
+    db.query(sql,[Name,FG_id,Gender_id,Dept_id,Rollno],(err,result)=>{
+        if(err){
+            res.status(500).json({"error": err.message})
+            return
+        }
+        if(result.affectedRows==0){
+            res.status(404).json({message:"No product found"})
+            return
+        }
+        res.status(200).json({message:`${Rollno} has updated`})
     })
 })
