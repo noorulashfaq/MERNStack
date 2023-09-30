@@ -8,9 +8,20 @@ POST http://localhost:1234/insert
 Content-Type: application/json
 
 {
-    "Rollno":176,
-    "Name":"Vijayamohanraj",
+    "Rollno":158,
+    "Name":"Sriraman",
     "FG_id":0,
     "Gender_id":0,
+    "Dept_id":0
+}
+
+PUT http://localhost:1234/update
+Content-Type: application/json
+
+{
+    "Rollno":145,
+    "Name":"Sriiiiii",
+    "FG_id":1,
+    "Gender_id":1,
     "Dept_id":0
 }
