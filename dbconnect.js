@@ -56,10 +56,6 @@ app.post('/insert',async(req,res)=>{
     })
 })
 
-// app.get('/update',async(req,res)=>{
-//     res.send("HI")
-// })
-
 app.put('/update',async(req,res)=>{
     const {Rollno,Name,FG_id,Gender_id,Dept_id} = req.body
     const sql="update student_details set Name=?, FG_id=?, Gender_id=?, Dept_id=? where Rollno=?"
@@ -73,5 +69,22 @@ app.put('/update',async(req,res)=>{
             return
         }
         res.status(200).json({message:`${Rollno} has updated`})
+    })
+})
+
+app.delete('/delete/:rollno',async(req,res)=>{
+    const Rollno=req.params.rollno
+    const {Rollno} = req.body
+    const sql="delete from Student_details where Rollno=?"
+    dataBase.query(sql,[Rollno],(err,result)=>{
+        if(err){
+            res.status(500).json({error:"Error while deleting the record"})
+            return
+        }
+        if(result.affectedRows==0){
+            res.status(404).json({message:"Product not found to delete"})
+            return
+        }
+        res.status(200).json({message:`${Rollno} has removed from stock`})
     })
 })
