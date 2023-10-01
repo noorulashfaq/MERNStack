@@ -19,11 +19,11 @@ PUT http://localhost:1234/update
 Content-Type: application/json
 
 {
-    "Rollno":145,
-    "Name":"Sriiiiii",
+    "Rollno":124,
+    "Name":"Noorul",
     "FG_id":1,
-    "Gender_id":1,
+    "Gender_id":0,
     "Dept_id":0
 }
 
-DELETE http://localhost:1234/delete/158
+DELETE http://localhost:1234/delete/515
