@@ -25,3 +25,5 @@ Content-Type: application/json
     "Gender_id":1,
     "Dept_id":0
 }
+
+DELETE http://localhost:1234/delete/158
