@@ -2,6 +2,7 @@ const refExp = require("express")
 const refMysql = require("mysql2")
 const bodyParser = require('body-parser');
 
+
 const app = refExp()
 const port = 1234
 const db=refMysql.createConnection({
@@ -55,6 +56,10 @@ app.post('/insert',async(req,res)=>{
     })
 })
 
+// app.get('/update',async(req,res)=>{
+//     res.send("HI")
+// })
+
 app.put('/update',async(req,res)=>{
     const {Rollno,Name,FG_id,Gender_id,Dept_id} = req.body
     const sql="update student_details set Name=?, FG_id=?, Gender_id=?, Dept_id=? where Rollno=?"
@@ -72,10 +77,9 @@ app.put('/update',async(req,res)=>{
 })
 
 app.delete('/delete/:rollno',async(req,res)=>{
-    const Rollno=req.params.rollno
-    const {Rollno} = req.body
+    const rollno=req.params.rollno
     const sql="delete from Student_details where Rollno=?"
-    dataBase.query(sql,[Rollno],(err,result)=>{
+    db.query(sql,[rollno],(err,result)=>{
         if(err){
             res.status(500).json({error:"Error while deleting the record"})
             return
@@ -84,6 +88,6 @@ app.delete('/delete/:rollno',async(req,res)=>{
             res.status(404).json({message:"Product not found to delete"})
             return
         }
-        res.status(200).json({message:`${Rollno} has removed from stock`})
+        res.status(200).json({message:`${rollno} has removed from stock`})
     })
 })
