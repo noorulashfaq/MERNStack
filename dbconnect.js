@@ -2,7 +2,6 @@ const refExp = require("express")
 const refMysql = require("mysql2")
 const bodyParser = require('body-parser');
 
-
 const app = refExp()
 const port = 1234
 const db=refMysql.createConnection({
